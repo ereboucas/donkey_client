@@ -1,5 +1,7 @@
 require 'bundler/setup'
 require 'donkey_client'
+require 'database_cleaner'
+require 'factory_bot'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -7,8 +9,21 @@ RSpec.configure do |config|
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
+  config.include FactoryBot::Syntax::Methods
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before(:suite) do
+    FactoryBot.find_definitions
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end
