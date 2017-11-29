@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'donkey_client'
   spec.version       = DonkeyClient::VERSION
   spec.authors       = ['CGTrader Developers']
-  spec.email         = ['']
+  spec.email         = ['info@cgtrader.com']
 
   spec.summary       = 'Donkey client gem'
   spec.description   = 'Donkey testing integration for CGTrader'
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = 'http://secret.cgtrader.gemhost'
   end
-  spec.required_ruby_version     = '>= 2.5.0'
+
   spec.required_rubygems_version = '> 2.0'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
@@ -28,6 +28,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'bin'
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_runtime_dependency 'activeresource', '~> 5.0'
 
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'database_cleaner'

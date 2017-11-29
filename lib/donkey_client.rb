@@ -1,5 +1,6 @@
+require 'dotenv/load'
 require 'donkey_client/version'
+require 'donkey_client/resource'
+require 'donkey_client/services'
 
-module DonkeyClient
-  # Your code goes here...
-end
+module DonkeyClient; end
