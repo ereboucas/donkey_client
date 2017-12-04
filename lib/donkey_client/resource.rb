@@ -1,6 +1,7 @@
 require 'activeresource'
 require_relative 'resource/base'
 require_relative 'resource/metric'
+require_relative 'resource/configuration'
 require_relative 'resource/alternative'
 
 module DonkeyClient
