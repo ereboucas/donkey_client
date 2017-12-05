@@ -2,6 +2,12 @@
 
 Donkey A/B testing integration into CGTrader market
 
+## Prerequisites (while private)
+set default bundler protocol to https for github sourced gems.
+```bash
+bundle config github.https true
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
