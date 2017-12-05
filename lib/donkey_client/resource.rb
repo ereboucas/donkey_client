@@ -1,4 +1,4 @@
-require 'activeresource'
+require 'active_resource'
 require_relative 'resource/base'
 require_relative 'resource/metric'
 require_relative 'resource/configuration'

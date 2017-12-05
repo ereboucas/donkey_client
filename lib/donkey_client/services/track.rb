@@ -17,10 +17,9 @@ module DonkeyClient
       def execute
         DonkeyClient::Resource::Metric.post(:track, query_params)
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
-        # log it? silently returns the exception object since all non :ok
-        # responses are exceptions
+        Donkey.notify(exception)
 
-        exception
+        false
       end
 
       private
