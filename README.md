@@ -13,6 +13,19 @@ gem 'donkey_client', github: 'CGTrader/donkey_client'
 And then execute:
 
     $ bundle
+    
+## Configuration
+Requires (donkey_client/.env.sample -> project/.env) in the gem using project to test locally. `donkey_dashboard` application can be offline for testing purposes.
+
+honeybadger/sentry can be used for connection errors if specified in initializer
+```ruby
+Donkey.configurate do |config|
+  config.notifier :honeybadger, :notify
+
+  # optional, preload happens anyway on first use if omitted
+  config.preload_donkey_configuration_data!
+end
+``` 
 
 ## Development
 
