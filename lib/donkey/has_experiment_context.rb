@@ -7,8 +7,8 @@ module Donkey
     end
 
     def donkey_panel
-      js_url  = "#{(ENV['DONKEY_URL'] || 'https://donkey.cgtr.io')}/assets/integration.js"
-      data = { anonymous_user_id: donkey.anonymous_user_id }
+      js_url = "#{(ENV['DONKEY_URL'] || 'https://donkey.cgtr.io')}/assets/integration.js"
+      data   = { anonymous_user_id: donkey.anonymous_user_id }
 
       view_context.javascript_include_tag(js_url, async: true, defer: true, data: data)
     end
