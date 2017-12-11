@@ -10,14 +10,14 @@ module Donkey
       @donkey_config[:notifier] = args
     end
 
-    def self.configuration=(new_configuration)
-      DonkeyClient::Resource::Configuration.create(new_configuration)
+    def self.configuration=(new_configuration_data)
+      DonkeyClient::Resource::Configuration.create(configuration: { data: new_configuration_data })
     rescue StandardError => error
       Donkey.notify(error)
 
       false
     ensure
-      @donkey_config[:last_configuration] = new_configuration
+      @donkey_config[:last_configuration] = new_configuration_data
     end
   end
 end
