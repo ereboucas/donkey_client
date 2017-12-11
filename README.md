@@ -22,8 +22,28 @@ honeybadger/sentry can be used for connection errors if specified in initializer
 Donkey.configurate do |config|
   config.notifier :honeybadger, :notify
 
-  # optional, preload happens anyway on first use if omitted
-  config.preload_donkey_configuration_data!
+  # set experiments, alternatives and metrics
+  config.configuration = {
+      experiments: {
+        sign_up_button_color: {
+          name: 'Button color in sign up forms',
+          alternatives:  {
+            red:   {
+              name: 'Red color'
+            },
+            green: {
+              name: 'Light green. Color code: #6D803E'
+            }
+          },
+          control_group: 'red'
+        }
+      },
+      metrics:     {
+        registration: {
+          name: 'User creates an account'
+        }
+      }
+    }
 end
 ``` 
 
