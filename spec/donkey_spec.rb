@@ -6,19 +6,16 @@ describe Donkey do
   end
 
   describe '.configuration_data' do
-    context 'when api back-end is offline' do
-      it { expect(subject.configuration_data).to be_falsey }
-    end
-
-    context 'when resource fetches data' do
-      let(:mock_response) { { 'mock_data' => nil } }
+    context 'when configuration is set' do
+      let(:mock_data) { { 'mock_data' => nil } }
 
       before do
-        allow(DonkeyClient::Resource::Configuration).
-          to(receive_message_chain(:last, :data, :as_json) { mock_response })
+        allow(DonkeyClient::Resource::Configuration).to(receive_messages(create: mock_data))
+
+        Donkey::Settings.configuration = mock_data
       end
 
-      it { expect(subject.configuration_data).to eq(mock_response) }
+      it { expect(subject.configuration_data).to eq(mock_data) }
     end
   end
 

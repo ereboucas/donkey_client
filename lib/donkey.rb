@@ -16,6 +16,6 @@ module Donkey
   end
 
   def self.configuration_data
-    (Settings.table[:last_configuration] ||= Settings.preload_donkey_configuration_data!).deep_dup
+    Settings.table[:last_configuration]&.deep_dup || {}
   end
 end
