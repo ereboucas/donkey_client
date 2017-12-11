@@ -11,7 +11,7 @@ module Donkey
     end
 
     def self.configuration=(new_configuration_data)
-      DonkeyClient::Resource::Configuration.create(configuration: { data: new_configuration_data })
+      DonkeyClient::Resource::Configuration.create(data: new_configuration_data)
     rescue StandardError => error
       Donkey.notify(error)
 
