@@ -34,4 +34,20 @@ describe Donkey do
       end
     end
   end
+
+  describe '.cache' do
+    context 'without cache setting' do
+      it { expect(subject.cache).to be_nil }
+    end
+
+    context 'with cache setting' do
+      before do
+        Donkey.configurate { |config| config.cache :cache }
+      end
+
+      it 'retrieves cache from settings' do
+        expect(subject.cache).to eq(:cache)
+      end
+    end
+  end
 end

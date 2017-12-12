@@ -10,6 +10,10 @@ module Donkey
       @donkey_config[:notifier] = args
     end
 
+    def self.cache(cache)
+      @donkey_config[:cache] = cache
+    end
+
     def self.configuration=(new_configuration_data)
       DonkeyClient::Resource::Configuration.create(data: new_configuration_data)
     rescue StandardError => error

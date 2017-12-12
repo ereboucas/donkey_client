@@ -14,7 +14,7 @@ module DonkeyClient
       end
 
       def execute
-        response_body.fetch('data') { control_group }
+        data { control_group }
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
         Donkey.notify(exception)
 
@@ -39,12 +39,24 @@ module DonkeyClient
         JSON.parse(response.body)
       end
 
+      def data
+        cache = Donkey.cache.read(cache_key)
+
+        return cache if cache.present?
+
+        Donkey.cache.write(cache_key, response_body.fetch('data'))
+      end
+
       def query_params
         {
           slug: experiment_slug,
           anonymous_user_id: anonymous_user_id,
           user_id: user_id
         }
+      end
+
+      def cache_key
+        "#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
       end
     end
   end

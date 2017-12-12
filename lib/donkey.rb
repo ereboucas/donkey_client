@@ -18,4 +18,8 @@ module Donkey
   def self.configuration_data
     Settings.table[:last_configuration]&.deep_dup || {}
   end
+
+  def self.cache
+    Settings.table[:cache]
+  end
 end
