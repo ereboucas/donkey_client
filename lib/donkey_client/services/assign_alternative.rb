@@ -25,14 +25,14 @@ module DonkeyClient
 
       def control_group
         Donkey.configuration_data.dig(
-          'experiments',
-          experiment_slug,
-          'control_group'
+          :experiments,
+          experiment_slug.to_sym,
+          :control_group
         )
       end
 
       def response
-        DonkeyClient::Resource::Alternative.post(:assign, query_params)
+        @response ||= DonkeyClient::Resource::Alternative.post(:assign, query_params)
       end
 
       def response_body
@@ -44,7 +44,7 @@ module DonkeyClient
 
         return cache if cache.present?
 
-        Donkey.cache.write(cache_key, response_body.fetch('data'))
+        skip_caching? ? response_body.fetch('data') : Donkey.cache.write(cache_key, response_body.fetch('data'))
       end
 
       def query_params
@@ -56,7 +56,11 @@ module DonkeyClient
       end
 
       def cache_key
-        "#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
+        @cache_key ||= "#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
+      end
+
+      def skip_caching?
+        response.code != '200' || response_body.fetch('data') == control_group
       end
     end
   end
