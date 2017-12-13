@@ -1,13 +1,12 @@
 module DonkeyClient
   module Services
     class AssignAlternative < Base
-      attr_reader :experiment_slug, :anonymous_user_id, :user_id, :caching
+      attr_reader :experiment_slug, :anonymous_user_id, :user_id
 
-      def initialize(experiment_slug, anonymous_user_id, user_id = nil, caching)
+      def initialize(experiment_slug, anonymous_user_id, user_id = nil)
         @experiment_slug   = experiment_slug.to_s.strip
         @anonymous_user_id = anonymous_user_id.to_s.strip
         @user_id           = user_id.to_i.nonzero?
-        @caching           = caching
       end
 
       def execute?
@@ -57,11 +56,11 @@ module DonkeyClient
       end
 
       def cache_key
-        @cache_key ||= "#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
+        @cache_key ||= "donkey/#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
       end
 
       def skip_caching?
-        !caching || response.code != '200' || response_body.fetch('data') == control_group
+        response.code != '200'
       end
     end
   end

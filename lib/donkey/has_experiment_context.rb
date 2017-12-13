@@ -16,8 +16,7 @@ module Donkey
     def donkey_experiment_context
       @donkey_experiment_context ||= ExperimentContext.new(
         user_id:           send(@@user_method_name)&.id,
-        anonymous_user_id: @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name),
-        caching:           Rails.env.production? && !send(@@user_method_name)&.admin?
+        anonymous_user_id: @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name)
       )
     end
     alias donkey donkey_experiment_context
