@@ -1,12 +1,13 @@
 module DonkeyClient
   module Services
     class AssignAlternative < Base
-      attr_reader :experiment_slug, :anonymous_user_id, :user_id
+      attr_reader :experiment_slug, :anonymous_user_id, :user_id, :cache
 
-      def initialize(experiment_slug, anonymous_user_id, user_id = nil)
+      def initialize(experiment_slug, anonymous_user_id, user_id = nil, cache = nil)
         @experiment_slug   = experiment_slug.to_s.strip
         @anonymous_user_id = anonymous_user_id.to_s.strip
         @user_id           = user_id.to_i.nonzero?
+        @cache             = cache
       end
 
       def execute?
@@ -14,7 +15,7 @@ module DonkeyClient
       end
 
       def execute
-        data { control_group }
+        alternative
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
         Donkey.notify(exception)
 
@@ -39,7 +40,7 @@ module DonkeyClient
         JSON.parse(response.body)
       end
 
-      def data
+      def alternative
         cache = Donkey.cache.read(cache_key)
 
         return cache if cache.present?
@@ -60,7 +61,7 @@ module DonkeyClient
       end
 
       def skip_caching?
-        response.code != '200'
+        !cache || response.code != '200'
       end
     end
   end

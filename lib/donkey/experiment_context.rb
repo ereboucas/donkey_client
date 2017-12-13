@@ -1,17 +1,19 @@
 module Donkey
   class ExperimentContext
-    attr_reader :user_id, :anonymous_user_id
+    attr_reader :user_id, :anonymous_user_id, :cache
 
-    def initialize(user_id:, anonymous_user_id:)
+    def initialize(user_id:, anonymous_user_id:, cache:)
       @user_id           = user_id
       @anonymous_user_id = anonymous_user_id
+      @cache             = cache
     end
 
     def participates_in?(experiment_slug, alternative_slug)
       assigned_alternative_slug = DonkeyClient::Services::AssignAlternative.execute(
         experiment_slug,
         anonymous_user_id,
-        user_id
+        user_id,
+        cache
       )
 
       assigned_alternative_slug && assigned_alternative_slug == alternative_slug.to_s
