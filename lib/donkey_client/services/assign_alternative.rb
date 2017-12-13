@@ -4,9 +4,9 @@ module DonkeyClient
       attr_reader :experiment_slug, :anonymous_user_id, :user_id
 
       def initialize(experiment_slug, anonymous_user_id, user_id = nil)
-        @experiment_slug = experiment_slug.to_s.strip
+        @experiment_slug   = experiment_slug.to_s.strip
         @anonymous_user_id = anonymous_user_id.to_s.strip
-        @user_id = user_id.to_i.nonzero?
+        @user_id           = user_id.to_i.nonzero?
       end
 
       def execute?
@@ -49,9 +49,9 @@ module DonkeyClient
 
       def query_params
         {
-          slug: experiment_slug,
+          slug:              experiment_slug,
           anonymous_user_id: anonymous_user_id,
-          user_id: user_id
+          user_id:           user_id
         }
       end
 
