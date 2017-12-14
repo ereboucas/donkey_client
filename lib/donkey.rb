@@ -4,6 +4,11 @@ require_relative 'donkey/experiment_context'
 require_relative 'donkey/has_experiment_context'
 
 module Donkey
+  module NullCache
+    def self.write(*); end
+    def self.read(*); end
+  end
+
   def self.configurate
     yield(Settings)
   end
@@ -20,6 +25,6 @@ module Donkey
   end
 
   def self.cache
-    Settings.table[:cache]
+    Settings.table[:cache] || NullCache
   end
 end
