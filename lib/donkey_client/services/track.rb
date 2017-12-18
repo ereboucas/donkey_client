@@ -1,13 +1,14 @@
 module DonkeyClient
   module Services
     class Track < Base
-      attr_reader :slug, :anonymous_user_id, :performance_increase_value, :user_id
+      attr_reader :slug, :anonymous_user_id, :performance_increase_value, :user_id, :is_bot
 
-      def initialize(slug, anonymous_user_id, performance_increase_value, user_id = nil)
+      def initialize(slug, anonymous_user_id, performance_increase_value, user_id = nil, is_bot)
         @slug = slug.to_s.strip
         @anonymous_user_id = anonymous_user_id.to_s.strip
         @performance_increase_value = performance_increase_value
         @user_id = user_id
+        @is_bot = is_bot
       end
 
       def execute?
@@ -15,7 +16,7 @@ module DonkeyClient
       end
 
       def execute
-        DonkeyClient::Resource::Metric.post(:track, query_params)
+        is_bot ? false : DonkeyClient::Resource::Metric.post(:track, query_params)
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
         Donkey.notify(exception)
 

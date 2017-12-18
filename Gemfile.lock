@@ -5,6 +5,7 @@ PATH
       actionpack
       activeresource
       activesupport
+      useragent
 
 GEM
   remote: https://rubygems.org/
@@ -80,6 +81,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
+    useragent (0.16.8)
 
 PLATFORMS
   ruby
