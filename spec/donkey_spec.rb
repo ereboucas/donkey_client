@@ -37,7 +37,7 @@ describe Donkey do
 
   describe '.cache' do
     context 'without cache setting' do
-      it { expect(subject.cache).to be_nil }
+      it { expect(subject.cache).to eq(Donkey::NullCache) }
     end
 
     context 'with cache setting' do
