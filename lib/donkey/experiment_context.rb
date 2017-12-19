@@ -1,11 +1,12 @@
 module Donkey
   class ExperimentContext
-    attr_reader :user_id, :anonymous_user_id, :cache
+    attr_reader :user_id, :anonymous_user_id, :cache, :is_bot
 
-    def initialize(user_id:, anonymous_user_id:, cache:)
+    def initialize(user_id:, anonymous_user_id:, cache:, is_bot:)
       @user_id           = user_id
       @anonymous_user_id = anonymous_user_id
       @cache             = cache
+      @is_bot            = is_bot
     end
 
     def participates_in?(experiment_slug, alternative_slug)
@@ -13,7 +14,8 @@ module Donkey
         experiment_slug,
         anonymous_user_id,
         user_id,
-        cache
+        cache,
+        is_bot
       )
 
       assigned_alternative_slug && assigned_alternative_slug == alternative_slug.to_s
@@ -24,7 +26,8 @@ module Donkey
         metric_slug,
         anonymous_user_id,
         performance_increase_value,
-        user_id
+        user_id,
+        is_bot
       )
     end
   end
