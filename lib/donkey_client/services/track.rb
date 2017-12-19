@@ -12,11 +12,11 @@ module DonkeyClient
       end
 
       def execute?
-        slug.present? && anonymous_user_id.present?
+        slug.present? && anonymous_user_id.present? && !is_bot
       end
 
       def execute
-        is_bot ? false : DonkeyClient::Resource::Metric.post(:track, query_params)
+        DonkeyClient::Resource::Metric.post(:track, query_params)
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
         Donkey.notify(exception)
 
