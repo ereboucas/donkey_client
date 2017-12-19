@@ -18,7 +18,7 @@ module Donkey
         user_id:           send(@@user_method_name)&.id,
         anonymous_user_id: @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name),
         cache:             @@cache[send(@@user_method_name)],
-        is_bot: Browser.new(request.user_agent).bot? || Browser.new(request.user_agent) == 'ELB-HealthChecker/1.0'
+        is_bot:            user_is_a_bot?
       )
     end
     alias donkey donkey_experiment_context
@@ -29,6 +29,12 @@ module Donkey
         @@anonymous_user_id_method_name = anonymous_user_id
         @@cache                         = cache
       end
+    end
+
+    private
+
+    def user_is_a_bot?
+      Browser.new(request.user_agent).bot? || Browser.new(request.user_agent) == 'ELB-HealthChecker/1.0'
     end
   end
 end
