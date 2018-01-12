@@ -25,7 +25,7 @@ module Donkey
       args    = [metric_slug, anonymous_user_id, performance_increase_value, user_id, is_bot]
       service = DonkeyClient::Services::Track
 
-      service.respond_to?(:delay) ? service.delay.execute(*args) : service.execute(*args)
+      block_given? ? yield(service, args) : service.execute(*args)
     end
   end
 end
