@@ -10,15 +10,19 @@ module Donkey
     end
 
     def participates_in?(experiment_slug, alternative_slug)
-      assigned_alternative_slug = DonkeyClient::Services::AssignAlternative.execute(
+      assigned_alternative_slug = participate(experiment_slug)
+
+      assigned_alternative_slug && assigned_alternative_slug == alternative_slug.to_s
+    end
+
+    def participate(experiment_slug)
+      DonkeyClient::Services::AssignAlternative.execute(
         experiment_slug,
         anonymous_user_id,
         user_id,
         cache,
         is_bot
       )
-
-      assigned_alternative_slug && assigned_alternative_slug == alternative_slug.to_s
     end
 
     def track!(metric_slug, performance_increase_value = 1.0)
