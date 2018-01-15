@@ -4,11 +4,11 @@ module DonkeyClient
       attr_reader :experiment_slug, :anonymous_user_id, :user_id, :cache, :is_bot, :is_always_control_group
 
       def initialize(experiment_slug, anonymous_user_id, user_id = nil, cache = nil, is_bot, is_always_control_group)
-        @experiment_slug      = experiment_slug.to_s.strip
-        @anonymous_user_id    = anonymous_user_id.to_s.strip
-        @user_id              = user_id.to_i.nonzero?
-        @cache                = cache
-        @is_bot               = is_bot
+        @experiment_slug         = experiment_slug.to_s.strip
+        @anonymous_user_id       = anonymous_user_id.to_s.strip
+        @user_id                 = user_id.to_i.nonzero?
+        @cache                   = cache
+        @is_bot                  = is_bot
         @is_always_control_group = is_always_control_group
       end
 

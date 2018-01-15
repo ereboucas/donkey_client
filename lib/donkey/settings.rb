@@ -14,8 +14,8 @@ module Donkey
       @donkey_config[:cache] = cache
     end
 
-    def self.always_control_group(*args)
-      @donkey_config[:always_control_group] = args
+    def self.always_control_group(arg)
+      @donkey_config[:always_control_group] = arg
     end
 
     def self.always_control_group?
