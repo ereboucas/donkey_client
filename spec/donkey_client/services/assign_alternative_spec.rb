@@ -1,5 +1,7 @@
 describe DonkeyClient::Services::AssignAlternative do
-  subject { described_class.execute(experiment_slug, anonymous_user_id, user_id, cache, is_bot, always_control_group) }
+  subject do
+    described_class.execute(experiment_slug, anonymous_user_id, user_id, cache, is_bot, is_always_control_group)
+  end
 
   let(:experiment_slug) { 'exp_slug' }
   let(:anonymous_user_id) { 'auid123' }
@@ -8,7 +10,7 @@ describe DonkeyClient::Services::AssignAlternative do
 
   context 'when user is bot' do
     let(:is_bot) { true }
-    let(:always_control_group) { false }
+    let(:is_always_control_group) { false }
 
     before { allow_any_instance_of(described_class).to receive(:control_group).and_return('control_group') }
 
@@ -19,7 +21,7 @@ describe DonkeyClient::Services::AssignAlternative do
 
   context 'when user is not bot' do
     let(:is_bot) { false }
-    let(:always_control_group) { false }
+    let(:is_always_control_group) { false }
 
     before { allow_any_instance_of(described_class).to receive(:alternative).and_return('alternative') }
 
@@ -30,7 +32,7 @@ describe DonkeyClient::Services::AssignAlternative do
 
   context 'always_control_group is set to true' do
     let(:is_bot) { false }
-    let(:always_control_group) { true }
+    let(:is_always_control_group) { true }
 
     before { allow_any_instance_of(described_class).to receive(:control_group).and_return('control_group') }
 

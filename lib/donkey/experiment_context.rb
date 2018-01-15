@@ -1,13 +1,13 @@
 module Donkey
   class ExperimentContext
-    attr_reader :user_id, :anonymous_user_id, :cache, :is_bot, :always_control_group
+    attr_reader :user_id, :anonymous_user_id, :cache, :is_bot, :is_always_control_group
 
-    def initialize(user_id:, anonymous_user_id:, cache:, is_bot:, always_control_group:)
-      @user_id              = user_id
-      @anonymous_user_id    = anonymous_user_id
-      @cache                = cache
-      @is_bot               = is_bot
-      @always_control_group = always_control_group
+    def initialize(user_id:, anonymous_user_id:, cache:, is_bot:, is_always_control_group:)
+      @user_id                 = user_id
+      @anonymous_user_id       = anonymous_user_id
+      @cache                   = cache
+      @is_bot                  = is_bot
+      @is_always_control_group = is_always_control_group
     end
 
     def participates_in?(experiment_slug, alternative_slug)
@@ -23,7 +23,7 @@ module Donkey
         user_id,
         cache,
         is_bot,
-        always_control_group
+        is_always_control_group
       )
     end
 
