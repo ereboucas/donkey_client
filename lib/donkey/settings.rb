@@ -14,6 +14,10 @@ module Donkey
       @donkey_config[:cache] = cache
     end
 
+    def self.always_control_group(*args)
+      @donkey_config[:always_control_group] = args
+    end
+
     def self.configuration=(new_configuration_data)
       DonkeyClient::Resource::Configuration.create(data: new_configuration_data)
     rescue StandardError => error

@@ -1,14 +1,15 @@
 module DonkeyClient
   module Services
     class AssignAlternative < Base
-      attr_reader :experiment_slug, :anonymous_user_id, :user_id, :cache, :is_bot
+      attr_reader :experiment_slug, :anonymous_user_id, :user_id, :cache, :is_bot, :always_control_group
 
-      def initialize(experiment_slug, anonymous_user_id, user_id = nil, cache = nil, is_bot)
-        @experiment_slug   = experiment_slug.to_s.strip
-        @anonymous_user_id = anonymous_user_id.to_s.strip
-        @user_id           = user_id.to_i.nonzero?
-        @cache             = cache
-        @is_bot            = is_bot
+      def initialize(experiment_slug, anonymous_user_id, user_id = nil, cache = nil, is_bot, always_control_group)
+        @experiment_slug      = experiment_slug.to_s.strip
+        @anonymous_user_id    = anonymous_user_id.to_s.strip
+        @user_id              = user_id.to_i.nonzero?
+        @cache                = cache
+        @is_bot               = is_bot
+        @always_control_group = always_control_group
       end
 
       def execute?
@@ -16,7 +17,7 @@ module DonkeyClient
       end
 
       def execute
-        is_bot ? control_group : alternative
+        is_bot || always_control_group ? control_group : alternative
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
         Donkey.notify(exception)
 

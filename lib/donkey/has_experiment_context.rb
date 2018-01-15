@@ -15,10 +15,11 @@ module Donkey
 
     def donkey_experiment_context
       @donkey_experiment_context ||= ExperimentContext.new(
-        user_id:           send(@@user_method_name)&.id,
-        anonymous_user_id: @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name),
-        cache:             @@cache[send(@@user_method_name)],
-        is_bot:            user_is_a_bot?
+        user_id:              send(@@user_method_name)&.id,
+        anonymous_user_id:    @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name),
+        cache:                @@cache[send(@@user_method_name)],
+        is_bot:               user_is_a_bot?,
+        always_control_group: Rails.env.development?
       )
     end
     alias donkey donkey_experiment_context
