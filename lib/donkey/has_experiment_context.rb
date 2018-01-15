@@ -19,7 +19,7 @@ module Donkey
         anonymous_user_id:    @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name),
         cache:                @@cache[send(@@user_method_name)],
         is_bot:               user_is_a_bot?,
-        always_control_group: Rails.env.development? || Rails.env.test?
+        always_control_group: ::Donkey::Settings.always_control_group?
       )
     end
     alias donkey donkey_experiment_context

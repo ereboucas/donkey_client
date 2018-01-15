@@ -18,6 +18,10 @@ module Donkey
       @donkey_config[:always_control_group] = args
     end
 
+    def self.always_control_group?
+      @donkey_config[:always_control_group]
+    end
+
     def self.configuration=(new_configuration_data)
       DonkeyClient::Resource::Configuration.create(data: new_configuration_data)
     rescue StandardError => error
