@@ -27,4 +27,8 @@ module Donkey
   def self.cache
     Settings.table[:cache] || NullCache
   end
+
+  def self.always_control_group
+    Settings.table[:always_control_group]
+  end
 end
