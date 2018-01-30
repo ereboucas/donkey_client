@@ -42,11 +42,17 @@ module DonkeyClient
       end
 
       def alternative
-        cache = Donkey.cache.read(cache_key)
+        return data if skip_caching?
 
+        cache = Donkey.cache.read(cache_key)
         return cache if cache.present?
 
-        skip_caching? ? response_body.fetch('data') : Donkey.cache.write(cache_key, response_body.fetch('data'))
+        Donkey.cache.write(cache_key, data)
+        data
+      end
+
+      def data
+        @data ||= response_body.fetch('data')
       end
 
       def query_params

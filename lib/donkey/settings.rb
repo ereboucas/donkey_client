@@ -10,8 +10,9 @@ module Donkey
       @donkey_config[:notifier] = args
     end
 
-    def self.cache(cache)
+    def self.cache(cache, options = {})
       @donkey_config[:cache] = cache
+      @donkey_config[:cache_options] = options || {}
     end
 
     def self.always_control_group(arg)
