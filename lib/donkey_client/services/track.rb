@@ -18,7 +18,7 @@ module DonkeyClient
       def execute
         DonkeyClient::Resource::Metric.post(:track, query_params)
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
-        Donkey.notify(exception)
+        Donkey.notify(exception) unless exception.is_a?(ActiveResource::TimeoutError)
 
         false
       end

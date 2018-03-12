@@ -18,7 +18,7 @@ module DonkeyClient
       def execute
         is_bot || ::Donkey::Settings.always_control_group? ? control_group : alternative
       rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
-        Donkey.notify(exception)
+        Donkey.notify(exception) unless exception.is_a?(ActiveResource::TimeoutError)
 
         control_group
       end
