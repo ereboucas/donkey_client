@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    donkey_client (0.1.0)
+    donkey_client (0.1.1)
       actionpack
       activeresource
       activesupport
@@ -38,7 +38,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    browser (2.5.2)
+    browser (2.5.3)
     builder (3.2.3)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
@@ -50,12 +50,12 @@ GEM
       activesupport (>= 3.0.0)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
-    loofah (2.1.1)
+    loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     rack (2.0.3)
     rack-test (0.8.2)
@@ -99,4 +99,4 @@ RUBY VERSION
    ruby 2.5.0p-1
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

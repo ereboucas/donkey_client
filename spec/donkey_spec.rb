@@ -46,7 +46,7 @@ describe Donkey do
       end
 
       it 'retrieves cache from settings' do
-        expect(subject.cache).to eq(:cache)
+        expect(subject.cache).to eq(Donkey::Cache)
       end
     end
   end
