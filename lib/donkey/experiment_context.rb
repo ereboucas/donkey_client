@@ -27,7 +27,7 @@ module Donkey
 
     def track!(metric_slug, performance_increase_value = 1.0)
       DonkeyClient::ServiceWorkers::Track.perform_later(
-        metric_slug,
+        metric_slug.to_s,
         anonymous_user_id,
         performance_increase_value,
         user_id,
