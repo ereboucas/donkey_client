@@ -50,4 +50,20 @@ describe Donkey do
       end
     end
   end
+
+  describe '.worker_queue' do
+    context 'without worker_queue setting' do
+      it { expect(subject.worker_queue).to eq(:default) }
+    end
+
+    context 'with worker_queue setting' do
+      before do
+        Donkey.configurate { |config| config.worker_queue :test_queue }
+      end
+
+      it 'retrieves worker_queue from settings' do
+        expect(subject.worker_queue).to eq(:test_queue)
+      end
+    end
+  end
 end

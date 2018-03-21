@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'actionpack'
   spec.add_runtime_dependency 'activeresource'
+  spec.add_runtime_dependency 'activejob'
   spec.add_runtime_dependency 'activesupport'
   spec.add_runtime_dependency 'browser'
 
@@ -40,4 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'factory_bot'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop', '0.52.1'
 end

@@ -26,10 +26,13 @@ module Donkey
     end
 
     def track!(metric_slug, performance_increase_value = 1.0)
-      args    = [metric_slug, anonymous_user_id, performance_increase_value, user_id, is_bot]
-      service = DonkeyClient::Services::Track
-
-      block_given? ? yield(service, args) : service.execute(*args)
+      DonkeyClient::ServiceWorkers::Track.perform_later(
+        metric_slug,
+        anonymous_user_id,
+        performance_increase_value,
+        user_id,
+        is_bot
+      )
     end
   end
 end

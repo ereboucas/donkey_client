@@ -1,4 +1,5 @@
 require 'active_support'
+require 'active_job'
 require_relative 'donkey/settings'
 require_relative 'donkey/experiment_context'
 require_relative 'donkey/has_experiment_context'
@@ -26,5 +27,9 @@ module Donkey
 
   def self.always_control_group
     Settings.table[:always_control_group]
+  end
+
+  def self.worker_queue
+    Settings.table[:worker_queue] || :default
   end
 end
