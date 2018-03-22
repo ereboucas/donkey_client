@@ -31,5 +31,15 @@ module Donkey
 
       block_given? ? yield(service, args) : service.execute(*args)
     end
+
+    def reject(metric_slug)
+      DonkeyClient::Services::Reject.execute(
+        metric_slug,
+        anonymous_user_id,
+        user_id,
+        is_bot,
+        Time.zone.now,
+      )
+    end
   end
 end
