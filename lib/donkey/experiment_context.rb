@@ -36,12 +36,12 @@ module Donkey
     end
 
     def reject(metric_slug)
-      DonkeyClient::Services::Reject.execute(
+      DonkeyClient::ServiceWorkers::Reject.perform_later(
         metric_slug,
         anonymous_user_id,
         user_id,
         is_bot,
-        Time.zone.now,
+        Time.zone.now
       )
     end
   end
