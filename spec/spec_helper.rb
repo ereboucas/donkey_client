@@ -1,4 +1,6 @@
-require 'bundler/setup'
+require 'bundler'
+Bundler.require
+
 require 'donkey_client'
 require 'database_cleaner'
 require 'factory_bot'

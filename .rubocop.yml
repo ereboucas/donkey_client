@@ -1,0 +1,77 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+
+  TargetRubyVersion: 2.5
+
+Style/Encoding:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+MethodLength:
+  Max: 15
+
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+    - "spec/factories/*"
+
+Style/Documentation:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+# Allow to use multiline { } blocks in rpsec
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+# Ignores _Parenthesize the param change { } to make sure that the block will be associated with the change method call._
+# Ref https://github.com/substancelab/dotfiles/pull/3/commits/d2a9fbf385c69edc34c323dda28ed19035420929
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*'
+
+Lint/EmptyWhen:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Severity: error
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  Description: Checks if uses of quotes match the configured preference.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-string-literals
+  Enabled: true
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+  - single_quotes
+  - double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Description: Checks if uses of quotes inside expressions in interpolated strings
+    match the configured preference.
+  Enabled: true
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+  - single_quotes
+  - double_quotes
+
+Layout/DotPosition:
+  Description: Checks the position of the dot in multi-line method calls.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
+  Enabled: true
+  EnforcedStyle: trailing
+  SupportedStyles:
+  - leading
+  - trailing

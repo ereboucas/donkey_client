@@ -19,6 +19,10 @@ module Donkey
       @donkey_config[:always_control_group] = arg
     end
 
+    def self.worker_queue(name)
+      @donkey_config[:worker_queue] = name
+    end
+
     def self.always_control_group?
       @donkey_config[:always_control_group]
     end
