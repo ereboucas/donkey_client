@@ -37,7 +37,7 @@ module Donkey
 
     def reject(metric_slug)
       DonkeyClient::ServiceWorkers::Reject.perform_later(
-        metric_slug,
+        metric_slug.to_s,
         anonymous_user_id,
         user_id,
         is_bot,
