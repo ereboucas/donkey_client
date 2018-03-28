@@ -34,5 +34,15 @@ module Donkey
         is_bot
       )
     end
+
+    def reject(metric_slug)
+      DonkeyClient::ServiceWorkers::Reject.perform_later(
+        metric_slug.to_s,
+        anonymous_user_id,
+        user_id,
+        is_bot,
+        Time.zone.now
+      )
+    end
   end
 end
