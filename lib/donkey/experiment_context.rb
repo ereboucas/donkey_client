@@ -41,7 +41,7 @@ module Donkey
         anonymous_user_id,
         user_id,
         is_bot,
-        Time.zone.now
+        Time.zone.now.to_s
       )
     end
   end
