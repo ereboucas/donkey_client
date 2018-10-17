@@ -2,7 +2,7 @@ module Donkey
   class ExperimentContext
     attr_reader :user_id, :anonymous_user_id, :cache, :is_bot, :new_visitor
 
-    def initialize(user_id:, anonymous_user_id:, cache:, is_bot:, new_visitor: new_visitor)
+    def initialize(user_id:, anonymous_user_id:, cache:, is_bot:, new_visitor:)
       @user_id           = user_id
       @anonymous_user_id = anonymous_user_id
       @cache             = cache

@@ -1,12 +1,13 @@
 describe DonkeyClient::Services::AssignAlternative do
   subject do
-    described_class.execute(experiment_slug, anonymous_user_id, user_id, cache, is_bot)
+    described_class.execute(experiment_slug, anonymous_user_id, user_id, cache, is_bot, new_visitor)
   end
 
   let(:experiment_slug) { 'exp_slug' }
   let(:anonymous_user_id) { 'auid123' }
   let(:cache) { Donkey::NullCache }
   let(:user_id) { nil }
+  let(:new_visitor) { nil }
 
   context 'when user is bot' do
     let(:is_bot) { true }
