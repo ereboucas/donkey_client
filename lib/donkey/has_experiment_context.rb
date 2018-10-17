@@ -24,10 +24,11 @@ module Donkey
     alias donkey donkey_experiment_context
 
     class_methods do
-      def donkey_identity(user: nil, anonymous_user_id:, cache:)
+      def donkey_identity(user: nil, anonymous_user_id:, cache:, new_visitor:)
         @@user_method_name              = user
         @@anonymous_user_id_method_name = anonymous_user_id
         @@cache                         = cache
+        @@new_visitor                   = new_visitor
       end
     end
 
