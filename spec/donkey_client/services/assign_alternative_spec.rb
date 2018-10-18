@@ -77,7 +77,7 @@ describe DonkeyClient::Services::AssignAlternative do
     context 'when response is empty' do
       before { cache.clear }
 
-      let(:response_body_hash) { { } }
+      let(:response_body_hash) { {} }
 
       it 'returns assigned alternative' do
         expect(subject).to eq('control_group')
