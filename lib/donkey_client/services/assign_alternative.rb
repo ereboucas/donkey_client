@@ -17,7 +17,7 @@ module DonkeyClient
 
       def execute
         is_bot || ::Donkey::Settings.always_control_group? ? control_group : alternative
-      rescue ActiveResource::ConnectionError, Errno::ECONNREFUSED => exception
+      rescue StandardError => exception
         Donkey.notify(exception) unless exception.is_a?(ActiveResource::TimeoutError)
 
         control_group
@@ -42,13 +42,11 @@ module DonkeyClient
       end
 
       def alternative
-        return data if skip_caching?
+        return data unless cache
 
-        cache = Donkey.cache.read(cache_key)
-        return cache if cache.present?
+        cache_value = cache.read(cache_key)
 
-        Donkey.cache.write(cache_key, data)
-        data
+        cache_value.present? ? cache_value : cache.write(cache_key, data)
       end
 
       def data
@@ -65,10 +63,6 @@ module DonkeyClient
 
       def cache_key
         @cache_key ||= "donkey/#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
-      end
-
-      def skip_caching?
-        !cache || response.code != '200'
       end
     end
   end
