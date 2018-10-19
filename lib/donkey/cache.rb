@@ -4,6 +4,8 @@ module Donkey
       key, val = args
 
       hash_in_current_thread[key] = val
+
+      'OK'
     end
 
     def self.read(*args, &_block)

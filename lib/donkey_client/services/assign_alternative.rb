@@ -44,9 +44,13 @@ module DonkeyClient
       def alternative
         return data unless cache
 
-        cache_value = cache.read(cache_key)
+        cache_value = Donkey.cache.read(cache_key)
 
-        cache_value.present? ? cache_value : cache.write(cache_key, data)
+        return cache_value if cache_value.present?
+
+        Donkey.cache.write(cache_key, data)
+
+        data
       end
 
       def data
