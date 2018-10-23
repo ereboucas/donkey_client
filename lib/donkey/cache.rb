@@ -1,7 +1,34 @@
 module Donkey
+  module ThreadCache
+    def self.write(*args, &_block)
+      key, val = args
+
+      hash_in_current_thread[key] = val
+
+      'OK'
+    end
+
+    def self.read(*args, &_block)
+      key, _val = args
+
+      hash_in_current_thread[key]
+    end
+
+    def self.clear
+      Thread.current[:cache] = {}
+    end
+
+    def self.hash_in_current_thread
+      Thread.current[:cache] ||= {}
+    end
+  end
+
   module NullCache
     def self.write(*); end
+
     def self.read(*); end
+
+    def self.clear; end
   end
 
   module Cache
