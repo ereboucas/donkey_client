@@ -18,15 +18,17 @@ module Donkey
         user_id:           send(@@user_method_name)&.id,
         anonymous_user_id: @@anonymous_user_id_method_name && send(@@anonymous_user_id_method_name),
         cache:             @@cache[send(@@user_method_name)],
-        is_bot:            user_is_a_bot?
+        is_bot:            user_is_a_bot?,
+        new_visitor:       @@new_visitor_method_name && send(@@new_visitor_method_name)
       )
     end
     alias donkey donkey_experiment_context
 
     class_methods do
-      def donkey_identity(user: nil, anonymous_user_id:, cache:)
+      def donkey_identity(user: nil, anonymous_user_id:, cache:, new_visitor:)
         @@user_method_name              = user
         @@anonymous_user_id_method_name = anonymous_user_id
+        @@new_visitor_method_name       = new_visitor
         @@cache                         = cache
       end
     end

@@ -1,9 +1,10 @@
 describe DonkeyClient::Services::AssignAlternative do
-  subject { described_class.execute(experiment_slug, anonymous_user_id, user_id, cache, is_bot) }
+  subject { described_class.execute(experiment_slug, anonymous_user_id, user_id, cache, is_bot, new_visitor) }
 
   let(:experiment_slug) { 'exp_slug' }
   let(:anonymous_user_id) { 'auid123' }
   let(:user_id) { nil }
+  let(:new_visitor) { nil }
   let(:cache) { true }
   let(:cache_key) { "donkey/#{experiment_slug}/#{anonymous_user_id}/#{user_id}" }
 
