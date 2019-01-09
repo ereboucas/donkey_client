@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    donkey_client (0.3.0)
+    donkey_client (0.4.0)
       actionpack
       activejob
       activeresource
@@ -57,7 +57,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mini_portile2 (2.3.0)
@@ -68,7 +68,7 @@ GEM
     parser (2.5.1.2)
       ast (~> 2.4.0)
     powerpack (0.1.1)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails-dom-testing (2.0.3)

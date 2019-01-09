@@ -27,6 +27,10 @@ module Donkey
       )
     end
 
+    def reparticipate(experiment_slug, alternative_slug)
+      DonkeyClient::ServiceWorkers::ChangeAlternative.execute(experiment_slug, alternative_slug, self)
+    end
+
     def track!(metric_slug, performance_increase_value = 1.0)
       DonkeyClient::ServiceWorkers::Track.perform_later(
         metric_slug.to_s,
