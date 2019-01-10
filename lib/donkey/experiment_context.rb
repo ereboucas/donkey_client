@@ -28,7 +28,14 @@ module Donkey
     end
 
     def reparticipate(experiment_slug, alternative_slug)
-      DonkeyClient::ServiceWorkers::ChangeAlternative.execute(experiment_slug, alternative_slug, self)
+      DonkeyClient::ServiceWorkers::ChangeAlternative.perform_later(
+        experiment_slug.to_s,
+        alternative_slug.to_s,
+        anonymous_user_id,
+        user_id,
+        is_bot,
+        new_visitor
+      )
     end
 
     def track!(metric_slug, performance_increase_value = 1.0)

@@ -1,18 +1,14 @@
 describe DonkeyClient::Services::ChangeAlternative do
-  subject { described_class.execute(experiment_slug, alternative_slug, donkey_context) }
+  subject do
+    described_class.execute(experiment_slug, alternative_slug, anonymous_user_id, user_id, is_bot, new_visitor)
+  end
 
   let(:experiment_slug) { 'exp_slug' }
   let(:alternative_slug) { 'alt_slug' }
   let(:is_bot) { false }
-
-  let(:donkey_context) do
-    double(
-      anonymous_user_id: 'auid123',
-      is_bot: is_bot,
-      user_id: nil,
-      new_visitor: nil
-    )
-  end
+  let(:anonymous_user_id) { 'auid123' }
+  let(:user_id) { nil }
+  let(:new_visitor) { nil }
 
   let(:expected_response) { double(body: { data: alternative_slug }.to_json, code: 200) }
 

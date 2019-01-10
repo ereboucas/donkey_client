@@ -1,14 +1,15 @@
 module DonkeyClient
   module Services
     class ChangeAlternative < Base
-      attr_reader :experiment_slug, :alternative_slug, :donkey_context
+      attr_reader :experiment_slug, :alternative_slug, :anonymous_user_id, :user_id, :is_bot, :new_visitor
 
-      delegate :anonymous_user_id, :user_id, :is_bot, :new_visitor, to: :donkey_context
-
-      def initialize(experiment_slug, alternative_slug, donkey_context)
-        @experiment_slug  = experiment_slug.to_s.strip
-        @alternative_slug = alternative_slug.to_s.strip
-        @donkey_context   = donkey_context
+      def initialize(experiment_slug, alternative_slug, anonymous_user_id, user_id = nil, is_bot = false, new_visitor = false)
+        @experiment_slug   = experiment_slug.to_s.strip
+        @alternative_slug  = alternative_slug.to_s.strip
+        @anonymous_user_id = anonymous_user_id
+        @user_id           = user_id
+        @is_bot            = is_bot
+        @new_visitor       = new_visitor
       end
 
       def execute?
