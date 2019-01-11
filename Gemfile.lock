@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    donkey_client (0.4.3)
+    donkey_client (0.4.4)
       actionpack
       activejob
       activeresource

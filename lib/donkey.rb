@@ -4,6 +4,7 @@ require_relative 'donkey/settings'
 require_relative 'donkey/experiment_context'
 require_relative 'donkey/has_experiment_context'
 require_relative 'donkey/cache'
+require_relative 'donkey/alternative_cache'
 
 module Donkey
   def self.configurate

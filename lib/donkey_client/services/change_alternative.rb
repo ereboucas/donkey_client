@@ -17,12 +17,16 @@ module DonkeyClient
       end
 
       def execute
-        data
+        alternative_cache.fetch(overwrite: true) { data }
       rescue StandardError => exception
         Donkey.notify(exception) unless exception.is_a?(ActiveResource::TimeoutError)
       end
 
       private
+
+      def alternative_cache
+        @alternative_cache ||= ::Donkey::AlternativeCache.new(experiment_slug, anonymous_user_id, user_id)
+      end
 
       def response
         @response ||= DonkeyClient::Resource::Alternative.post(:change, query_params)

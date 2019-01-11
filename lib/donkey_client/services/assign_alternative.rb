@@ -26,6 +26,10 @@ module DonkeyClient
 
       private
 
+      def alternative_cache
+        @alternative_cache ||= ::Donkey::AlternativeCache.new(experiment_slug, anonymous_user_id, user_id)
+      end
+
       def control_group
         Donkey.configuration_data.dig(
           :experiments,
@@ -45,13 +49,7 @@ module DonkeyClient
       def alternative
         return data unless cache
 
-        cache_value = Donkey.cache.read(cache_key)
-
-        return cache_value if cache_value.present?
-
-        Donkey.cache.write(cache_key, data)
-
-        data
+        alternative_cache.fetch { data }
       end
 
       def data
@@ -65,10 +63,6 @@ module DonkeyClient
           user_id:           user_id,
           new_visitor:       new_visitor
         }
-      end
-
-      def cache_key
-        @cache_key ||= "donkey/#{experiment_slug}/#{anonymous_user_id}/#{user_id}"
       end
     end
   end
