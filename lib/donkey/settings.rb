@@ -23,6 +23,10 @@ module Donkey
       @donkey_config[:worker_queue] = name
     end
 
+    def self.priority_worker_queue(name)
+      @donkey_config[:priority_worker_queue] = name
+    end
+
     def self.always_control_group?
       @donkey_config[:always_control_group]
     end

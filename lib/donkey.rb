@@ -33,4 +33,8 @@ module Donkey
   def self.worker_queue
     Settings.table[:worker_queue] || :default
   end
+
+  def self.priority_worker_queue
+    Settings.table[:priority_worker_queue] || worker_queue
+  end
 end
