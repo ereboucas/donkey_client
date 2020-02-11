@@ -39,6 +39,8 @@ module Donkey
     end
 
     def track!(metric_slug, performance_increase_value = 1.0)
+      return unless Donkey.configuration_data[:experiments].any?
+
       DonkeyClient::ServiceWorkers::Track.perform_later(
         metric_slug.to_s,
         anonymous_user_id,
@@ -49,6 +51,8 @@ module Donkey
     end
 
     def reject(metric_slug)
+      return unless Donkey.configuration_data[:experiments].any?
+
       DonkeyClient::ServiceWorkers::Reject.perform_later(
         metric_slug.to_s,
         anonymous_user_id,
